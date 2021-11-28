@@ -2,6 +2,8 @@
 
 This project involves the implementation of a one-stop solution for all of the farmer's needs. Some of the major problems addressed include the creation of a unique digital identity, enabling a dynamic label that can be used to view detailed information about the product, supply chain visibility, product authenticity, customer support, ease of shopping experience. 
 
+## Our Solution and Key Features
+
 Our proposed solution basically involves the implementation of 
 - A One-Stop Application aiming to improve the farmer’s experience throughout. 
  - A single digital identity for each Bayer product to facilitate supply chain visibility and tracking powered by blockchain technology. 
@@ -20,7 +22,9 @@ Our application's key features include the following:
 
 Each part of the application has been explained detailed in the PowerPoint presentation and the demo video.
 
-Project Repository Link: https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon
+
+
+## Instructions on running
 
 For running the web app:
 - The entire web app has been deployed on Heroku and can be accessed through this link https://bayeridl.herokuapp.com 
