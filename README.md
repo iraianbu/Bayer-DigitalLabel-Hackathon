@@ -38,7 +38,7 @@ Each part of the application has been explained detailed in the PowerPoint prese
 ![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Frequent.png)
 ![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Frequent.png)
 ![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Frequent.png)
-![Dashboard-1](![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Frequent.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Frequent.png)
 
 
 ## Instructions on running
