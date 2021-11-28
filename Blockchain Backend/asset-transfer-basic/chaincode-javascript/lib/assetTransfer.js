@@ -18,6 +18,10 @@ class ProductAuthenticity extends Contract {
                 "distributor":"nil",
                 "status":"factory",
                 "delivery_rating":"nil",
+                "bayer_hash": "d66d33b2a6b5485f4945d0d6a0cb28a75e3eac5d104e46eaa920849c8a8ef926",
+                "supplier_hash": "nil",
+                "distributor_hash": "nil",
+                "customer_hash":"nil",
             },
         ];
 
@@ -49,6 +53,7 @@ class ProductAuthenticity extends Contract {
     async AddProduct(ctx, id_product, name_product) {
         let resval = ctx.clientIdentity.getMSPID();
         if(resval==="Org1MSP"){ //ensuring that the user is from Org1 (Bayer)
+            let hash  = crypto.createHash('sha256').update(id_product).digest('base64');
             const product = {
                 product_id: id_product,
                 product_name: name_product,
@@ -58,6 +63,10 @@ class ProductAuthenticity extends Contract {
                 distributor: "nil",
                 status: "factory",
                 delivery_rating: "nil",
+                bayer_hash: hash,
+                supplier_hash: "nil",
+                distributor_hash: "nil",
+                customer_hash: "nil",
             };
             console.log("Product has been added into the blockchain successfully");
             await ctx.stub.putState(id_product, Buffer.from(JSON.stringify(product)));
@@ -72,18 +81,34 @@ class ProductAuthenticity extends Contract {
         let resval = ctx.clientIdentity.getMSPID();
         if(resval==="Org2MSP"){ //ensuring that the user is from Org2 (Proxy)
             const request = await ctx.stub.getState(id_product);
-            const res = JSON.parse(request);
-            if(request!=null && distributor_key==="rmhfse" && res.current_stage_num==0){
-                res.owner = "Distributor ABC",
-                res.current_stage_num = 1;
-                res.distributor = "Distributor ABC";
-                res.status = "distributor";
-                await ctx.stub.putState(id_product, Buffer.from(JSON.stringify(res)));
+            if (!request || request.length === 0) {
+                console.log("Your product is unauthentic. Please contact Bayer");
             }
             else{
-                console.log("Incorrect distributor id / invalid product, please try again. ")
+                    const res = JSON.parse(request);
+                    if(distributor_key!="rmhfse"){
+                        console.log("**********");
+                        console.log("Incorrect distributor id, please try again. ");
+                        console.log("**********");
+                    }
+                    else if(res.current_stage_num!=0){
+                        console.log("Your product's supply chain has been broken, please contact Bayer.");
+                    }
+                    else{
+                        console.log("**********");
+                        console.log("Your product ownership has been successfully transferred to Distributor XYZ");
+                        console.log("**********");
+                        let dig_sign = id_product + distributor_key;
+                        let hash  = crypto.createHash('sha256').update(dig_sign).digest('base64');
+                        res.owner = "Distributor XYZ",
+                        res.current_stage_num = 1;
+                        res.distributor = "Distributor XYZ";
+                        res.status = "At distributor XYZ";
+                        res.distributor_hash = hash;
+                        await ctx.stub.putState(id_product, Buffer.from(JSON.stringify(res)));
+                    }
+                }
             }
-        }
         else{
             console.log("You do not have access to perform this operation");
         }   
@@ -93,16 +118,36 @@ class ProductAuthenticity extends Contract {
         let resval = ctx.clientIdentity.getMSPID();
         if(resval==="Org2MSP"){ //ensuring that the user is from Org2 (Proxy)
             const request = await ctx.stub.getState(id_product);
-            const res = JSON.parse(request);
-            if(request!=null && supplier_key==="qshwfe" && res.current_stage_num==1){
-                res.owner = "Supplier ABC",
-                res.current_stage_num = 2;
-                res.supplier = "Supplier ABC";
-                res.status = "supplier";
-                await ctx.stub.putState(id_product, Buffer.from(JSON.stringify(res)));
+            if (!request || request.length === 0) {
+                console.log("********");
+                console.log("Your product is unauthentic. Please contact Bayer");
+                console.log("********");
             }
             else{
-                console.log("Incorrect supplier id / invalid product, please try again. ")
+                const res = JSON.parse(request);
+                if(supplier_key!="qshwfe"){
+                    console.log("*******");
+                    console.log("Incorrect supplier id, please try again. ");
+                    console.log("*******");
+                }
+                else if(res.current_stage_num!=1){
+                    console.log("******");
+                    console.log("Your product's supply chain has been broken, please contact Bayer.");
+                    console.log("******");
+                }
+                else{
+                    console.log("**********");
+                    console.log("Your product ownership has been successfully transferred to Supplier ABC");
+                    console.log("********");
+                    let dig_sign = id_product + supplier_key;
+                    let hash  = crypto.createHash('sha256').update(dig_sign).digest('base64');
+                    res.supplier_hash = hash;
+                    res.owner = "Supplier ABC",
+                    res.current_stage_num = 2;
+                    res.supplier = "Supplier ABC";
+                    res.status = " At supplier ABC";
+                    await ctx.stub.putState(id_product, Buffer.from(JSON.stringify(res)));
+                }
             }
         }
         else{
@@ -114,16 +159,34 @@ class ProductAuthenticity extends Contract {
         let resval = ctx.clientIdentity.getMSPID();
         if(resval==="Org2MSP"){ //ensuring that the user is from Org2 (Proxy)
             const request = await ctx.stub.getState(id_product);
-            const res = JSON.parse(request);
-            if(request!=null && customer_key==="bhnkmk" && res.current_stage_num==2){
-                res.owner = "Customer ABC",
-                res.current_stage_num = 3;
-                res.status = "Delivered to Customer";
-                res.delivery_rating = rating;
-                await ctx.stub.putState(id_product, Buffer.from(JSON.stringify(res)));
+            if (!request || request.length === 0) {
+                console.log("Your product is unauthentic. Please contact Bayer");
             }
             else{
-                console.log("Incorrect customer id / invalid product, please try again. ")
+                const res = JSON.parse(request);
+                if(customer_key!="bhnkmk"){
+                    console.log("*******");
+                    console.log("Incorrect customer id, please try again. ");
+                    console.log("*******");
+                }
+                else if(res.current_stage_num!=2){
+                    console.log("******");
+                    console.log("Your product's supply chain has been broken, please contact Bayer.");
+                    console.log("******");
+                }
+                else{
+                    console.log("**********");
+                    console.log("Your product ownership has been successfully transferred to Customer PQR");
+                    console.log("********");
+                    let dig_sign = id_product + customer_key;
+                    let hash  = crypto.createHash('sha256').update(dig_sign).digest('base64');
+                    res.customer_hash = hash;
+                    res.owner = "Customer PQR",
+                    res.current_stage_num = 3;
+                    res.status = "Delivered to Customer PQR";
+                    res.delivery_rating = rating;
+                    await ctx.stub.putState(id_product, Buffer.from(JSON.stringify(res)));
+                }
             }
         }
         else{
