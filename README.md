@@ -1,9 +1,13 @@
 # Bayer-Digital-Label-Hackathon
 
-This project involves the implementation of a one-stop solution for all of the farmer's needs. Some of the major problems addressed include the creation of a unique digital identity, enabling a dynamic label that can be used to view detailed information about the product, supply chain visibility, product authenticity, customer support, ease of shopping experience. 
+## About the Project
+This project involves the implementation of a one-stop solution for all of the farmer's needs. Some of the major problems addressed include the creation of a unique digital identity, enabling a dynamic label that can be used to view detailed information about the product, supply chain visibility, product authenticity, customer support, ease of shopping experience.
+
+## Demo Video
+The entire demo consisting of the entire web application demo followed by the blockchain hyperledger fabric demo, and then the deep learning model to predict the plant disease from the image is present at https://www.youtube.com/watch?v=zjjBaXwKuS0
+
 
 ## Our Solution and Key Features
-
 Our proposed solution basically involves the implementation of 
 - A One-Stop Application aiming to improve the farmer’s experience throughout. 
  - A single digital identity for each Bayer product to facilitate supply chain visibility and tracking powered by blockchain technology. 
@@ -22,6 +26,19 @@ Our application's key features include the following:
 
 Each part of the application has been explained detailed in the PowerPoint presentation and the demo video.
 
+## Product Screenshots
+### Dashboard Page
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Dashboard.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Your_products.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/My%20orders.png)
+
+### Store Page
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Store.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Productdetail.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Frequent.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Frequent.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Frequent.png)
+![Dashboard-1](![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Frequent.png)
 
 
 ## Instructions on running
