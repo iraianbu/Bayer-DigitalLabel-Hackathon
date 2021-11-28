@@ -19,7 +19,8 @@ class Dashboard extends Component{
             c:0,
             spinnervisibility:1,
            show:false,
-           setShow:false
+           setShow:false,
+           loyalty_points: 800
         };
         this.addspinner=this.addspinner.bind(this);
         this.addfilterbutton=this.addfilterbutton.bind(this);
@@ -82,6 +83,9 @@ class Dashboard extends Component{
                             onClick={async()=>{
                                 await this.setState({b:1});
                                 await this.setState({setShow:true});
+                                var curr_points = this.state.loyalty_points;
+                                curr_points = curr_points + 10;
+                                this.setState({loyalty_points:curr_points});
                             }}
                             > 
                             <span><i class="fas fa-qrcode "></i> <strong>Scan QR</strong> </span>
@@ -111,7 +115,7 @@ class Dashboard extends Component{
                                 <Row>  <Col> <h5> {prod.type} | {prod.size} </h5> </Col> </Row> 
 
                                 <Row> 
-                                    <Col> <p> <strong> Last Purchased on: </strong> 28 Aug, 2021 </p> </Col>
+                                    <Col> <p> <strong> Last Purchased on: </strong> 28 Dec, 2021 </p> </Col>
                                 </Row>
                             </Col>
 
@@ -138,7 +142,7 @@ class Dashboard extends Component{
             </Row>
             <Row>
                 <Row> 
-                    <Col> <h3> Orders on the way </h3>  </Col> 
+                    <Col className="mt-5"> <h3> Orders on the way </h3>  </Col> 
                     
                 </Row>
 
@@ -153,7 +157,7 @@ class Dashboard extends Component{
                                 <Row>  <Col> <h5> {prod.type} | {prod.size} </h5> </Col> </Row> 
 
                                 <Row> 
-                                    <Col> <p className="order-history-desc"> <strong> Expected Delivery: </strong> 28 Aug, 2021 </p> </Col>
+                                    <Col> <p className="order-history-desc"> <strong> Expected Delivery: </strong> 28 Dec, 2021 </p> </Col>
                                 </Row>
                             </Col>
 
@@ -185,10 +189,10 @@ class Dashboard extends Component{
                 > <i style={{backgroundColor:"#F4F4F4", borderRadius:"10px", color:"#0B4619", padding:"20px"}} class="far fa-gem fa-2x"></i> </Col>
                 <Col style={{marginLeft:"20px"}}>
                     <Row>
-                        <Col> <h4> 750</h4></Col>
+                        <Col> <h4> {this.state.loyalty_points}</h4></Col>
                     </Row>
                     <Row>
-                        <Col> <p> Loyal Coins </p></Col>
+                        <Col> <p> Bayer e-Points </p></Col>
                     </Row>
                 </Col>
             </Row>
@@ -285,7 +289,7 @@ class Dashboard extends Component{
 
    componentDidMount()
    {
-    fetch('http://localhost:7000/',{
+    fetch('https://bayeridl-backend.herokuapp.com/',{
         method: 'GET',
         headers: {
             'Content-Type' : 'application/json'

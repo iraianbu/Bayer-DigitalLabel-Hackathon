@@ -23,7 +23,7 @@ class Navcomp extends Component {
           <Container fluid>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             
-              <Navbar.Brand href="#home" className="navbrandname">
+              <Navbar.Brand href="/Dashboard" className="navbrandname">
                 <Image style={{height:"50px",width:"50px"}} src={logo}
               
                 />

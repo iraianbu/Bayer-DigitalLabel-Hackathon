@@ -24,7 +24,7 @@ class Main extends Component {
     }
     componentDidMount()
     {
-     fetch('http://localhost:7000/',{
+     fetch('https://bayeridl-backend.herokuapp.com/',{
          method: 'GET',
          headers: {
              'Content-Type' : 'application/json'

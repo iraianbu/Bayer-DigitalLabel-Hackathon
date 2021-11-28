@@ -29,7 +29,7 @@ class Store extends Component{
     }
     componentDidMount()
     {
-        fetch('http://localhost:7000/cartlength',{
+        fetch('https://bayeridl-backend.herokuapp.com/cartlength',{
             method: 'GET',
             headers: {
                 'Content-Type' : 'application/json'
@@ -251,7 +251,7 @@ class Store extends Component{
                             <Col  style={{}}>
                             <div style={{cursor:"pointer"}}
                             onClick={()=>{
-                               window.location.href="http://localhost:3000/Cart"
+                               window.location.href="https://bayeridl.herokuapp.com/Cart"
                            }}>
                            <i className="fas fa-2x fa-shopping-cart" style={{position:"absolute", right:"10px", top:"8px"}}></i>
                              <span className='badge badge-success' style={{position:"absolute", right:"10px", top:"8px"}} id='lblCartCount'>{this.state.cartlength}</span>

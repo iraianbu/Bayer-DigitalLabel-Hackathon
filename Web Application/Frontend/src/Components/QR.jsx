@@ -19,7 +19,7 @@ class QR extends Component {
      
         var key={id:parseInt(this.state.result)};
         console.log(key);
-        fetch('http://localhost:7000/products',{
+        fetch('https://bayeridl-backend.herokuapp.com/products',{
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json'
@@ -29,10 +29,10 @@ class QR extends Component {
         if(res.ok)
         return res.json();
     }).then(async(res)=>{
-      var url="http://localhost:3000/Dashboard/"+parseInt(this.state.result);
+      var url="http://bayeridl.herokuapp.com/Dashboard/"+parseInt(this.state.result);
       window.location.href=url;
       var key={prod:res}
-      fetch('http://localhost:7000/qr',{
+      fetch('https://bayeridl-backend.herokuapp.com/qr',{
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json'
