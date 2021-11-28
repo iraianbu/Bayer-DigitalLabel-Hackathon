@@ -6,7 +6,8 @@ class QR extends Component {
   {
     super(props);
     this.state = {
-      result: 'No result'
+      result: 'No result',
+     
     }
 
   }
@@ -14,13 +15,37 @@ class QR extends Component {
  
   handleScan = data => {
     if (data) {
-      this.setState({
-        result: data
-      })
-    }
+      this.setState({result: data })
+        var key={id:parseInt(this.state.result)};
+        console.log(key);
+        fetch('http://localhost:7000/products',{
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body:JSON.stringify(key)
+    }).then((res)=>{
+        if(res.ok)
+        return res.json();
+    }).then(async(res)=>{
+      var key={prod:res}
+      fetch('http://localhost:7000/qr',{
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body:JSON.stringify(key)
+    })
+        // var url="http://localhost:3000/Dashboard/"+parseInt(this.state.result);
+        // window.location.href=url;
+    })
+
+
   }
-  handleError = err => {
-    console.error(err)
+
+  }
+  handleError = errr => {
+    console.error(errr)
   }
 
  
@@ -28,10 +53,10 @@ class QR extends Component {
     return (
       <div>
         <QrReader
-          delay={100}
+          delay={10}
           onError={this.handleError}
           onScan={this.handleScan}
-          style={{ marginLeft:"30px" },{width:"20%"}}
+          style={{ marginLeft:"30px" },{width:"300px"}}
          
         />
         

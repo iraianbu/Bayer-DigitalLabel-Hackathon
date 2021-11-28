@@ -2,7 +2,7 @@ var products = [
     {
         key: 45672,
         type: "Fungicide",
-        name: "Flint Extra Fungicide",
+        name: "Flint Extra Fungicideee",
         img_src: "https://www.sunspotsupply.com/media/catalog/product/cache/29738d70a38100d8acf8617ac5ce7888/f/l/flint1.jpg",
         registered_crops: "Grapes, Pome, fruits, Hops, Root vegetables",
         instructions: "FLINT Extra Alone:1. Add approximately 1/2 of the required amount of water to the mix tank.2. With the agitator running, add the FLINT Extra to the tank.3. Continue agitation while adding the remainder of the water.4. Begin application of the solution after the FLINT Extra has completely and uniformly dispersed into the mix water.NOTE: Maintain agitation until all of the mixture has been applied.",
@@ -13,6 +13,9 @@ var products = [
         applicabality: "Grapes, Pome, fruits, Hops, Root vegetables",
         authenticity: "100% Authentic",
         disposal_guidelines: "Do not use in the presence of heat or sunlight. Do not use on the same day as the previous application. Do not use on the same day as the previous application. Do not use on the same day as the previous application.",
+        price:2000,
+        size:"Large",
+        qty: 3
     },
     {
         key: 45673,
@@ -28,7 +31,10 @@ var products = [
         applicabality: "Foliar",    
         authenticity: "100% Authentic",
         disposal_guidelines: "Do not use in the presence of heat or sunlight. Do not use on the same day as the previous application. Do not use on the same day as the previous application. Do not use on the same day as the previous application.",
-    },
+        price:1000,
+        size:"Large",
+        qty: 3
+     },
     {
         key: 45674,
         name: "TripleFLEX® II Herbicide",
@@ -43,6 +49,9 @@ var products = [
         applicabality: "Foliar",
         authenticity: "100% Authentic",
         disposal_guidelines: "Do not use in the presence of heat or sunlight. Do not use on the same day as the previous application. Do not use on the same day as the previous application. Do not use on the same day as the previous application.",
+        price:1050,
+        size:"Large",
+        qty: 3
     },
     {
         key: 45675,
@@ -58,6 +67,9 @@ var products = [
         applicabality: "Foliar",
         authenticity: "100% Authentic",
         disposal_guidelines: "Do not use in the presence of heat or sunlight. Do not use on the same day as the previous application. Do not use on the same day as the previous application. Do not use on the same day as the previous application.",
+        price:5000,
+        size:"Large",
+        qty: 3
     },
     {
         key: 45676,
@@ -73,6 +85,9 @@ var products = [
         applicabality: "Foliar",
         authenticity: "100% Authentic",
         disposal_guidelines: "Do not use in the presence of heat or sunlight. Do not use on the same day as the previous application. Do not use on the same day as the previous application. Do not use on the same day as the previous application.",
+        price:790,
+        size:"Large",
+        qty: 3
     }
 ]
 export default products;

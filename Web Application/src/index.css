@@ -5,9 +5,50 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto', sans-serif !important;
+  background-color: red;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+.badge-warning[href] {
+  background-color: #c67605;
+}
+
+#drop-btn1, #drop-btn2{
+  background-color: #0B4619;
+  color: white;
+}
+
+.btn1{
+  background-color: #F4F4F4 !important;
+  color: #0B4619 !important;
+  border: 1px solid #0B4619;
+}
+.btn1:hover{
+ 
+
+  background-color: #0B4619 !important;
+  color: white !important;
+}
+.btn2{
+  background-color: #0B4619!important;
+  color: white!important;
+}
+.btn2:hover{
+  
+  background-color: #FAFAFA!important;
+  color: #0B4619!important;
+}
+.tile:hover{
+  border: 1px solid #0B4619;
 }
