@@ -285,7 +285,7 @@ class Dashboard extends Component{
 
    componentDidMount()
    {
-    fetch('http://localhost:7000',{
+    fetch('http://localhost:7000/',{
         method: 'GET',
         headers: {
             'Content-Type' : 'application/json'
