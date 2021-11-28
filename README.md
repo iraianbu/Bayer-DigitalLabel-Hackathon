@@ -19,3 +19,21 @@ Our application's key features include the following:
 - SmartScan Feature to identify disease from the image of the plant
 
 Each part of the application has been explained detailed in the PowerPoint presentation and the demo video.
+
+Project Repository Link: https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon
+
+For running the web app:
+- The entire web app has been deployed on Heroku and can be accessed through this link https://bayeridl.herokuapp.com 
+- If required to make changes in the deployed web app and re-run, simply clone the public repository and push changes to the remote repository. 
+
+For running hyperledger fabric:
+- First download the required dependencies for running hyperledger fabric such as Node JS, Git Bash, and Docker. 
+- Once all dependencies have been downloaded successfully, create a new directory in the form of "$HOME/go/src/github.com/<your_github_userid>"
+- Download the hyperledger fabric image to your repository by running the following command, "$ curl -sSL https://bit.ly/2ysbOFE | bash -s"
+- Once downloaded, go into the fabric samples folder, and then asset transfer basic, and then replace chaincode-javascript folder with the one from the above shared repository.
+- Now follow the steps given at the repository and execute the commands to interact with the deployed chaincode. 
+
+For running the deep learning demo:
+- Download the ipynb file from the repository
+- Run it through Google Colab and attatch the files specified in the Readme file.
+- Once done, execute the cells in sequence to use the trained model to make predictions.
