@@ -134,7 +134,7 @@ class Cart extends Component{
                                 </tr>
                                 <tr>
                                     <th colSpan="2"> Discount applied for 10% </th>
-                                    <th style={{color:"red"}}> -{this.gettotal()*0.1} </th>
+                                    <th style={{color:"red"}}>{Math.floor(this.gettotal()*0.1)}</th>
                                 </tr>
                                 <tr>
                                     <th colSpan="2"> Total </th>
@@ -144,11 +144,11 @@ class Cart extends Component{
                                 
                             </Table>
                             <Row><Col>
-                                {/* <form action="http://localhost:7000/create-checkout-session" method="POST"> */}
+                                {/* <form action="https://bayeridl-backend.herokuapp.com/create-checkout-session" method="POST"> */}
                                     <Button onClick={async ()=>{
                                         var q=(this.gettotal() - this.gettotal()*0.1)*100;
                                         var key={"total":q};
-                                          fetch('http://localhost:7000/create-checkout-session',{
+                                          fetch('https://bayeridl-backend.herokuapp.com/create-checkout-session',{
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type' : 'application/json'
@@ -171,7 +171,7 @@ class Cart extends Component{
 
 
                 </Container>
-                {/* <form action="http://localhost:7000/create-checkout-session" method="POST">
+                {/* <form action="https://bayeridl-backend.herokuapp.com/create-checkout-session" method="POST">
                 <Button type="submit">Checkout </Button> 
                 </form> */}
                
@@ -185,7 +185,7 @@ class Cart extends Component{
 
     componentDidMount()
     {
-        fetch('http://localhost:7000/cartpage',{
+        fetch('https://bayeridl-backend.herokuapp.com/cartpage',{
         method: 'GET',
         headers: {
             'Content-Type' : 'application/json'

@@ -1,5 +1,5 @@
 import react, {Component} from 'react';
-import { Row, Col, ListGroup, InputGroup, Form, Button, ButtonGroup, Container, FormControl, Card, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Row, Col, ListGroup, InputGroup, Form, Button, ButtonGroup, Spinner,Container, FormControl, Card, Dropdown, DropdownButton } from 'react-bootstrap';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -17,17 +17,19 @@ class Store extends Component{
     constructor(props){
         super(props);
         this.state ={
-            products: products,
+            products: [],
             selectedCatagories: ['Insecticide', 'Herbicide', 'Fungicide' ],
             selectedMin: 0,
             selectedMax: 10000,
             slidervalue:23,
-            cartlength:0
+            cartlength:0,
+            spinnerstatus:1
         };
+        this.addcomponent=this.addcomponent.bind(this);
     }
     componentDidMount()
     {
-        fetch('http://localhost:7000/cartlength',{
+        fetch('https://bayeridl-backend.herokuapp.com/cartlength',{
             method: 'GET',
             headers: {
                 'Content-Type' : 'application/json'
@@ -38,93 +40,96 @@ class Store extends Component{
             this.setState({cartlength:res["count"]});
             this.setState({products:res["arr"]});
             console.log(res["arr"]);
+            this.setState({spinnerstatus:0});
         })
 
     }
-    render(){
-       
-        const MySlider = () => {
 
-            const [ value, setValue ] = useState(0); 
-          
-            return (
-              <>
-              </>
-            );
-          
-          };
-        const filterProducts = (prod) => {
-            
-            for(var i=0; i<this.state.selectedCatagories.length; i++){
-                if(prod.type === this.state.selectedCatagories[i]) {
-                    if(prod.price >= this.state.selectedMin && prod.price <= this.state.selectedMax) {
-                        // console.log(prod, this.state.selectedMax, this.state.selectedMin);
-                        return true;
-                    }
-                   
+  
+     filterProducts = (prod) => {
+        
+        for(var i=0; i<this.state.selectedCatagories.length; i++){
+            if(prod.type === this.state.selectedCatagories[i]) {
+                if(prod.price >= this.state.selectedMin && prod.price <= this.state.selectedMax) {
+                    // console.log(prod, this.state.selectedMax, this.state.selectedMin);
+                    return true;
                 }
+               
             }
-            return false;
         }
-        const handleCheck = async(checked, value) => {
-            if(value === "All") {
-                if(checked){
-                    await this.setState({selectedCatagories: ['Insecticide', 'Herbicide', 'Fungicide' ]})
-                    document.querySelector("#cat1").checked = false;
-                    document.querySelector("#cat2").checked = false;
-                    document.querySelector("#cat3").checked = false;
-                }
-                else{
-                    document.querySelector("#cat0").checked= true;
-                    
-                    
-                }
-            }
-            
-            else if(value !== "All"){
-                document.querySelector("#cat0").checked = false;
-                var checkboxes = document.querySelectorAll("input[type='checkbox']");
-                var arr = [];
-                await this.setState({selectedCatagories: arr})
-                console.log('selected catogores = ', this.state.selectedCatagories.length);
-                for(var i=0; i<checkboxes.length; i++){
-                    if(checkboxes[i].checked === true) {
-                        arr = this.state.selectedCatagories;
-                        arr.push(checkboxes[i].value);
-                        await this.setState({selectedCatagories: arr})
-                    }
-                }
-            }
-        };
-       
-        const handleRange = async(value, side, id) => {
-            var changeId;
-            if(id === "minValue") changeId = "minValueText";
-            else if(id === "maxValue") changeId = "maxValueText";
-            else if(id === "minValueText") changeId = "minValue";
-            else changeId = "maxValue";
-            if(side === 0){
-                await this.setState({selectedMin: value});
-                document.querySelector("#"+changeId).value = value;
+        return false;
+    }
+    handleCheck = async(checked, value) => {
+        if(value === "All") {
+            if(checked){
+                await this.setState({selectedCatagories: ['Insecticide', 'Herbicide', 'Fungicide' ]})
+                document.querySelector("#cat1").checked = false;
+                document.querySelector("#cat2").checked = false;
+                document.querySelector("#cat3").checked = false;
             }
             else{
-                await this.setState({selectedMax: value});
-                document.querySelector("#"+changeId).value = value;
-
+                document.querySelector("#cat0").checked= true;
+                
+                
             }
-            console.log(this.state.selectedMin + " " + this.state.selectedMax);
+        }
+        
+        else if(value !== "All"){
+            document.querySelector("#cat0").checked = false;
+            var checkboxes = document.querySelectorAll("input[type='checkbox']");
+            var arr = [];
+            await this.setState({selectedCatagories: arr})
+            console.log('selected catogores = ', this.state.selectedCatagories.length);
+            for(var i=0; i<checkboxes.length; i++){
+                if(checkboxes[i].checked === true) {
+                    arr = this.state.selectedCatagories;
+                    arr.push(checkboxes[i].value);
+                    await this.setState({selectedCatagories: arr})
+                }
+            }
+        }
+    };
+   
+    handleRange = async(value, side, id) => {
+        var changeId;
+        if(id === "minValue") changeId = "minValueText";
+        else if(id === "maxValue") changeId = "maxValueText";
+        else if(id === "minValueText") changeId = "minValue";
+        else changeId = "maxValue";
+        if(side === 0){
+            await this.setState({selectedMin: value});
+            document.querySelector("#"+changeId).value = value;
+        }
+        else{
+            await this.setState({selectedMax: value});
+            document.querySelector("#"+changeId).value = value;
 
         }
-        const getShortDesc = (sentence) => {
-            return sentence.slice(0,60)+"  . . .";
-        }
-        const setValue=async(n)=>{
-            this.setState({slidervalue:n});
-        };
-        return(
+        console.log(this.state.selectedMin + " " + this.state.selectedMax);
 
-            <>
-            <Container fluid className="store"
+    }
+     getShortDesc = (sentence) => {
+        return sentence.slice(0,60)+"  . . .";
+    }
+    setValue=async(n)=>{
+        this.setState({slidervalue:n});
+    };
+
+    addcomponent()
+    {
+        if(this.state.spinnerstatus===1)
+        {
+            return(
+                <div className="mb-5" style={{textAlign:"center",marginTop:"20%"}}>
+                <Spinner style={{width:"40px",height:"40px"}}  animation="border" role="status">
+                </Spinner>
+                </div>
+            );
+        }
+        else{
+            return(
+
+                <Container fluid className="store"
                 
             >
                 <Row>
@@ -147,25 +152,25 @@ class Store extends Component{
                                 {/* <Form.check label="Fungicide" /> */}
                                 <input 
                                 style={{width:"20px", height:"20px"}}
-                                type="checkbox" id="cat0" value = 'All' defaultChecked={true} onClick={(e) => handleCheck(e.target.checked, e.target.value)}></input> 
+                                type="checkbox" id="cat0" value = 'All' defaultChecked={true} onClick={(e) => this.handleCheck(e.target.checked, e.target.value)}></input> 
                                 <label className="store-filter-data"> All </label> 
                             </Col> </Row>
                             <Row> <Col> 
                                 <input 
                                 style={{width:"20px", height:"20px"}}
-                                type="checkbox" id="cat1" value = 'Fungicide'  onClick={(e) => handleCheck(e.target.checked, e.target.value)}></input> 
+                                type="checkbox" id="cat1" value = 'Fungicide'  onClick={(e) => this.handleCheck(e.target.checked, e.target.value)}></input> 
                                 <label className="store-filter-data"> Fungicide </label> 
                             </Col> </Row>
                             <Row> <Col> 
                                 <input 
                                 style={{width:"20px", height:"20px"}}
-                                type="checkbox" id="cat2" value = 'Herbicide'  onClick={(e) => handleCheck(e.target.checked, e.target.value)}></input> 
+                                type="checkbox" id="cat2" value = 'Herbicide'  onClick={(e) => this.handleCheck(e.target.checked, e.target.value)}></input> 
                                 <label className="store-filter-data"> Herbicide </label> 
                             </Col> </Row>
                             <Row> <Col> 
                                 <input 
                                 style={{width:"20px", height:"20px", backgourndColor:"red"}}
-                                type="checkbox" id="cat3" value = 'Insecticide'  onClick={(e) => handleCheck(e.target.checked, e.target.value)}></input> 
+                                type="checkbox" id="cat3" value = 'Insecticide'  onClick={(e) => this.handleCheck(e.target.checked, e.target.value)}></input> 
                                 <label className="store-filter-data"> Insecticide </label> 
                             </Col> </Row>
                             
@@ -184,7 +189,7 @@ class Store extends Component{
                                 id="minValue"
                                 // value={this.state.slidervalue}
                                 defaultValue="0" 
-                                onChange={e => handleRange(e.target.value, 0, e.target.id)}
+                                onChange={e => this.handleRange(e.target.value, 0, e.target.id)}
                                 max="10000"
                                 min="0"
                             
@@ -200,7 +205,7 @@ class Store extends Component{
                             <RangeSlider
                                 id="maxValue"
                                 defaultValue="10000" 
-                                onChange={e => handleRange(e.target.value, 1, e.target.id)}
+                                onChange={e => this.handleRange(e.target.value, 1, e.target.id)}
                                 max="10000"
                                 min="0"
                             
@@ -211,10 +216,10 @@ class Store extends Component{
                             </Row>
                             <Row>
                                 <Col md={6}> 
-                                    <input type="text" className="range-input"  placeholder="0" id="minValueText" onChange={(e) => handleRange(e.target.value, 0, e.target.id)}></input>
+                                    <input type="text" className="range-input"  placeholder="0" id="minValueText" onChange={(e) => this.handleRange(e.target.value, 0, e.target.id)}></input>
                                 </Col>
                                 <Col md={6}> 
-                                    <input type="text" className="range-input"  placeholder="10000" id="maxValueText" onChange={(e) => handleRange(e.target.value, 1, e.target.id)}></input>
+                                    <input type="text" className="range-input"  placeholder="10000" id="maxValueText" onChange={(e) => this.handleRange(e.target.value, 1, e.target.id)}></input>
                                 </Col>
                             </Row>
                         
@@ -242,18 +247,11 @@ class Store extends Component{
                                     style={{backgroundColor:"#F7F7F7", color:"#0B4619"}}
                                 type="text" className="store-products-search-input" placeholder="Search"></input>
                             </Col>
-                            <Col md={5} style={{}} className="store-sort">
-                                <DropdownButton id="store-sort-button" title="Sort by Price" 
-                                
-                                > 
-                                <Dropdown.Item href="/QR">Price </Dropdown.Item>
-                                <Dropdown.Item href="/Store">Go to Store</Dropdown.Item>
-                                </DropdownButton>   
-                            </Col>
+                            
                             <Col  style={{}}>
                             <div style={{cursor:"pointer"}}
                             onClick={()=>{
-                               window.location.href="http://localhost:3000/Cart"
+                               window.location.href="https://bayeridl.herokuapp.com/Cart"
                            }}>
                            <i className="fas fa-2x fa-shopping-cart" style={{position:"absolute", right:"10px", top:"8px"}}></i>
                              <span className='badge badge-success' style={{position:"absolute", right:"10px", top:"8px"}} id='lblCartCount'>{this.state.cartlength}</span>
@@ -268,7 +266,7 @@ class Store extends Component{
                         </Row>
                         <Row>
                            
-                            {this.state.products.filter((p) => filterProducts(p)).map((prod) => {
+                            {this.state.products.filter((p) => this.filterProducts(p)).map((prod) => {
                                 return(
                                     <>
                                     
@@ -284,7 +282,7 @@ class Store extends Component{
                                             <Card.Title className="store-product-card-title">{prod.name}</Card.Title>
                                             <Row> <Col
                                                 style={{margin:"auto 20px"}}
-                                            > {getShortDesc(prod.info)} </Col>   </Row>
+                                            > {this.getShortDesc(prod.info)} </Col>   </Row>
                                             <Row className="store-product-price-row">
                                                 <Col style={{}}>
                                                     
@@ -334,6 +332,18 @@ class Store extends Component{
                 </Row>
                
             </Container>
+
+            );
+        }
+    }
+    render(){
+       
+      
+
+        return(
+
+            <>
+            {this.addcomponent()}
             
             </>
 

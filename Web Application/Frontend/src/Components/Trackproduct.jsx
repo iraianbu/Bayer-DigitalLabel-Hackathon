@@ -22,7 +22,7 @@ class Trackproduct extends Component{
       {
             const key={id:this.props.id}
             console.log(key);
-            fetch('http://localhost:7000/products',{
+            fetch('https://bayeridl-backend.herokuapp.com/products',{
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'

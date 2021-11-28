@@ -13,12 +13,12 @@ class Failure extends Component{
     componentDidMount() 
     {
         setInterval(() => {
-            if(this.state.seconds === 0) window.location.href="http://localhost:3000/Dashboard";
+            if(this.state.seconds === 0) window.location.href="http://bayeridl.herokuapp.com/Dashboard";
             else{
                 this.setState({seconds: this.state.seconds -1 });
             }
         }, 1000); 
-        // fetch('http://localhost:7000/cartlength',{
+        // fetch('https://bayeridl-backend.herokuapp.com/cartlength',{
         //     method: 'GET',
         //     headers: {
         //         'Content-Type' : 'application/json'

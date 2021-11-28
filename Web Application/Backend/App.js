@@ -293,8 +293,8 @@ app.post('/create-checkout-session', async (req, res) => {
         },
       ],
       mode: 'payment',
-      success_url: 'http://localhost:3000/Success',
-      cancel_url: 'http://localhst:3000/Failure',
+      success_url: 'https://bayeridl.herokuapp.com/Success',
+      cancel_url: 'https://bayeridl.herokuapp.com/Failure',
     });
   
     var obj={"url":session.url};
@@ -302,7 +302,7 @@ app.post('/create-checkout-session', async (req, res) => {
   });
   
 
-app.listen(7000,async function(){
+app.listen(process.env.PORT||7000,async function(){
 console.log("listening");
 });
 

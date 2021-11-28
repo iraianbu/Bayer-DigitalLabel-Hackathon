@@ -40,7 +40,7 @@ class Productdetail extends Component{
     {
         const key={id:this.props.id}
         var w=this.props.id;
-        fetch('http://localhost:7000/products',{
+        fetch('https://bayeridl-backend.herokuapp.com/products',{
          method: 'POST',
          headers: {
              'Content-Type' : 'application/json'
@@ -57,7 +57,7 @@ class Productdetail extends Component{
              w=w.toString();
              console.log(finalreccomonadtion[w][0]);
              const key2={id:finalreccomonadtion[w][0]}
-             fetch('http://localhost:7000/products',{
+             fetch('https://bayeridl-backend.herokuapp.com/products',{
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'application/json'
@@ -195,7 +195,7 @@ class Productdetail extends Component{
                                     p["size"]=this.state.size;
                                         const key=p;
                                         console.log(key);
-                                        fetch('http://localhost:7000/cart',{
+                                        fetch('https://bayeridl-backend.herokuapp.com/cart',{
                                         method: 'POST',
                                         headers: {
                                             'Content-Type' : 'application/json'
