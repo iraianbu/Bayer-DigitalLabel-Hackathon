@@ -11,6 +11,9 @@ import Cart from "./Cart";
 import Support from "./Support";
 import Authenticity from "./Authenticity";
 import Trackproduct from "./Trackproduct";
+import Success from "./Success";
+import Failure from "./Failure";
+import Error from "./Error";
 class Main extends Component {
     constructor(props) {
       super(props);
@@ -45,6 +48,13 @@ class Main extends Component {
           
   
           <Switch>
+          <Route
+                exact
+              path="/"
+              component={() => {
+                return <Dashboard />;
+              }}
+            />
             <Route
                 exact
               path="/Dashboard"
@@ -88,8 +98,28 @@ class Main extends Component {
                 return <Authenticity />;
               }}
             />
-            
-            <Redirect to="/Dashboard" />
+            <Route
+              exact
+              path="/Success"
+              component={() => {
+                return <Success />;
+              }}
+            />
+            <Route
+              exact
+              path="/Failure"
+              component={() => {
+                return <Failure />;
+              }}
+            />
+            <Route
+              exact
+              path="/Error"
+              component={() => {
+                return <Error />;
+              }}
+            />
+            <Redirect to="/Error" />
           </Switch>
          
         </div>

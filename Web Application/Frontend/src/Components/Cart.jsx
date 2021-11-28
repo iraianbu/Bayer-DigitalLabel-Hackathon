@@ -86,7 +86,7 @@ class Cart extends Component{
                                     style={{textAlign:"right"}}
                                 >
                                     {/* <Row> <Col> <Button variant="light"> Remove  <i class="fas fa-times"></i> </Button></Col> </Row> */}
-                                    <Row> <Col><Link to={`/Dashboard/${p._id}`}> <Button variant="light"> View <i class="fas fa-location-arrow"></i> </Button> </Link></Col> </Row>
+                                    <Row> <Col><Link to={`/Dashboard/${p._id}`}> <Button variant="light"> View <i class="fas fa-eye"></i> </Button> </Link></Col> </Row>
                                     
                             
                                     {/* <i style={{cursor:"pointer"}}  onClick={async ()=>{

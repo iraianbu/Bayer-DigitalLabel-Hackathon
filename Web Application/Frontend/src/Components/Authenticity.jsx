@@ -3,7 +3,7 @@ import {Row, Col, Container, Button, Card, Image, Modal} from 'react-bootstrap';
 import products from "./products";
 import StepProgressBar from "./StepProgressBar";
 import QrReader from 'react-qr-reader'
-
+const sha256=require("sha256");
 
 class Authenticity extends Component{
     constructor(props){
@@ -14,14 +14,15 @@ class Authenticity extends Component{
             setShow:false,
             result: 'No result',
             c:0,
-            status:0
+            status:0,
+            hashvalue:""
         }
         this.addcomponent=this.addcomponent.bind(this);
     }
     handleScan = data => {
         if (data) {
           this.setState({result: data })
-          alert(data);
+          this.setState({setShow:false});
           var key={id:parseInt(this.state.result)};
           console.log(key);
           fetch('http://localhost:7000/products',{
@@ -37,6 +38,7 @@ class Authenticity extends Component{
             this.setState({c:1});
             this.setState({prod:res});
             this.setState({status:res["current_stage"]});
+          
       })
     
     
@@ -111,44 +113,117 @@ class Authenticity extends Component{
                 </Card>
                 </Col>
                 <Col md={8} style={{marginLeft:"50px"}}>
-                    {/* <h3> Product Authentication </h3> */}
-                    <p> 
-                        <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVW7B2zWVfswK8JFPnjZQhGKZT_Ev1DcJxGA&usqp=CAU"
-                            style={{height:"40px", widht:"40px"}}
-                        /> <span> Product Verified as Original  </span>
+                {/* <h3> Product Authentication </h3> */}
+                <p> 
+                    <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVW7B2zWVfswK8JFPnjZQhGKZT_Ev1DcJxGA&usqp=CAU"
+                        style={{height:"40px", widht:"40px"}}
+                    /> <span> Product Verified as Original  </span>
 
-                    </p>
-                    <h3> Track you Product </h3>
-                    <Row style={{marginTop:"30px", marginLeft:"30px"}}> <Col >
-                    <StepProgressBar status={this.state.status} />
-                    </Col> </Row>
-                    <Row style={{marginTop:"30px"}}>
-                        <Col md={3} style={{textAlign:"center"}}>
-                            <h5> Bayer Factory </h5>
-                            <p> 28 Aug, 21. 9.22 </p>
-                        </Col>
-                        <Col md={3} style={{textAlign:"center"}}>
-                            <h5> Bayer Distributor </h5>
-                            <p> 28 Aug, 21. 9.22 </p>
+                </p>
+                <h3> Track your Product </h3>
+                <Row style={{marginTop:"30px", marginLeft:"30px"}}> <Col >
+                <StepProgressBar status={this.state.status} />
+                </Col> </Row>
+                <Row style={{marginTop:"30px"}}>
+                    <Col md={3} style={{textAlign:"center"}}>
+                        <h5> Bayer Factory </h5>
+                        <p> 28 Aug, 21. 9.22 </p>
+                        <Button onClick={()=>{
+                            if(this.state.status>=0)
+                            {
+                                var z=this.state.prod._id;
+                                var d=sha256(z);
+                                this.setState({hashvalue:d});
+                            }
+                          
+                        }} variant="outline-success">View Hash</Button>
+                       
+                    </Col>
+                    <Col md={3} style={{textAlign:"center"}}>
+                        <h5> Bayer Distributor </h5>
+                        <p> 28 Aug, 21. 9.22 </p>
+                        <Button  onClick={()=>{
+                            if(this.state.status>=33)
+                            {
+                                var z=this.state.prod._id.toString()+"rmhfse";
+                                var d=sha256(z);
+                                
+                                this.setState({hashvalue:d});
+                            }
+                            else{
+                                this.setState({hashvalue:"Hasn't reached Distributor"});
+                            }
+                        }} variant="outline-success">View Hash</Button>
+                      
+                    </Col>
+                    <Col md={3} style={{textAlign:"center"}} >
+                        <h5> Bayer Supplier </h5>
+                        <p> 28 Aug, 21. 9.22 </p>
+                        <Button  onClick={()=>{
+                            if(this.state.status>=66)
+                            {
+                                var z=this.state.prod._id.toString()+"qshwfe";
+                                var d=sha256(z);
+                                
+                                this.setState({hashvalue:d});
+                            }
+                            else{
+                                this.setState({hashvalue:"Hasn't reached Supplier"});
+                            }
+                        }} variant="outline-success">View Hash</Button>
+                       
+                    </Col>
+                    <Col md={3} style={{textAlign:"center"}}>
+                        <h5> You </h5>
+                        <p> 28 Aug, 21. 9.22 </p>
+                        <Button  onClick={()=>{
+                            if(this.state.status>=100)
+                            {
+                                var z=this.state.prod._id.toString()+"bhmknk";
+                                var d=sha256(z);
+                                
+                                this.setState({hashvalue:d});
+                            }
+                            else{
+                                this.setState({hashvalue:"Hasn't been Delivered"});
+                            }
+                        }} variant="outline-success">View Hash</Button>
+                       
+                    </Col>
 
-                        </Col>
-                        <Col md={3} style={{textAlign:"center"}} >
-                            <h5> Bayer Supplier </h5>
-                            <p> 28 Aug, 21. 9.22 </p>
-                        </Col>
-                        <Col md={3} style={{textAlign:"center"}}>
-                            <h5> You </h5>
-                            <p> 28 Aug, 21. 9.22 </p>
-                        </Col>
-
-                    </Row>
-                </Col>
+                </Row>
+                <h3 className="mt-5">Transaction Hash</h3>
+                <p >{this.state.hashvalue}</p>
+            </Col>
             </Row>
             </Container>
             );
         }
         else{
-            return <div></div>
+            return(
+                <Container style={{marginTop:"30px"}}>
+                    <h5 style={{textAlign:"justify"}}>&nbsp; &nbsp; &nbsp; &nbsp;  <span style={{fontWeight:"bolder", fontSize:"25px"}}> T</span>his page enables you to track the authenticity of any given Bayer product, powered entirely by permissioned blockchain technology.  This enables us to make the entire supply chain process of the product transparent, and ensure complete visibility. This helps us know the provenance of each and every product, and ensure that there are no counterfeit products infiltrating the supply chain.
+                    </h5>
+                    <Row style={{margin:"40px auto", textAlign:"center", backgroundColor:"#F4F4F4", padding:"50px", borderRadius:"10px"}}>
+                        <Col md={4}>
+                            <span style={{color:"#0B4619"}}> <i class="fas fa-truck fa-3x"></i> </span>
+                            <span style={{marginLeft:"10px"}}> Complex Supply Chain Visibility </span>
+                        </Col>
+                        <Col md={4}>
+                            <span style={{color:"#0B4619"}}><i class="fas fa-percent fa-3x"></i> </span>
+                            <span style={{marginLeft:"10px"}}> 100% Authentic </span>
+                        </Col>
+                        <Col md={4}>
+                            <span style={{color:"#0B4619"}}> <i class="fas fa-qrcode fa-3x"></i> </span>
+                            <span style={{marginLeft:"10px"}}> Powered by QR codes </span>
+                        </Col>
+
+
+                    </Row>                        
+
+                </Container>
+
+            )
         }
     }
     render(){

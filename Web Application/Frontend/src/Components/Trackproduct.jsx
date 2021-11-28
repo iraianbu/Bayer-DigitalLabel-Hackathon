@@ -3,7 +3,7 @@ import {Row, Col, Container, Button, Card, Image, Modal,Spinner} from 'react-boo
 import products from "./products";
 import StepProgressBar from "./StepProgressBar";
 import QrReader from 'react-qr-reader'
-
+const sha256=require("sha256");
 
 class Trackproduct extends Component{
     constructor(props){
@@ -11,7 +11,8 @@ class Trackproduct extends Component{
         this.state = {
             prod:{},
             status:0,
-            spinnerstatus:1
+            spinnerstatus:1,
+            hashvalue:""
            
         }
       this.addcomponent=this.addcomponent.bind(this);
@@ -90,7 +91,7 @@ class Trackproduct extends Component{
                     /> <span> Product Verified as Original  </span>
 
                 </p>
-                <h3> Track you Product </h3>
+                <h3> Track your Product </h3>
                 <Row style={{marginTop:"30px", marginLeft:"30px"}}> <Col >
                 <StepProgressBar status={this.state.status} />
                 </Col> </Row>
@@ -98,22 +99,72 @@ class Trackproduct extends Component{
                     <Col md={3} style={{textAlign:"center"}}>
                         <h5> Bayer Factory </h5>
                         <p> 28 Aug, 21. 9.22 </p>
+                        <Button onClick={()=>{
+                            if(this.state.status>=0)
+                            {
+                                var z=this.state.prod._id;
+                                var d=sha256(z);
+                                this.setState({hashvalue:d});
+                            }
+                          
+                        }} variant="outline-success">View Hash</Button>
+                       
                     </Col>
                     <Col md={3} style={{textAlign:"center"}}>
                         <h5> Bayer Distributor </h5>
                         <p> 28 Aug, 21. 9.22 </p>
-
+                        <Button  onClick={()=>{
+                            if(this.state.status>=33)
+                            {
+                                var z=this.state.prod._id.toString()+"rmhfse";
+                                var d=sha256(z);
+                                
+                                this.setState({hashvalue:d});
+                            }
+                            else{
+                                this.setState({hashvalue:"Hasn't reached Distributor"});
+                            }
+                        }} variant="outline-success">View Hash</Button>
+                      
                     </Col>
                     <Col md={3} style={{textAlign:"center"}} >
                         <h5> Bayer Supplier </h5>
                         <p> 28 Aug, 21. 9.22 </p>
+                        <Button  onClick={()=>{
+                            if(this.state.status>=66)
+                            {
+                                var z=this.state.prod._id.toString()+"qshwfe";
+                                var d=sha256(z);
+                                
+                                this.setState({hashvalue:d});
+                            }
+                            else{
+                                this.setState({hashvalue:"Hasn't reached Supplier"});
+                            }
+                        }} variant="outline-success">View Hash</Button>
+                       
                     </Col>
                     <Col md={3} style={{textAlign:"center"}}>
                         <h5> You </h5>
                         <p> 28 Aug, 21. 9.22 </p>
+                        <Button  onClick={()=>{
+                            if(this.state.status>=100)
+                            {
+                                var z=this.state.prod._id.toString()+"bhmknk";
+                                var d=sha256(z);
+                                
+                                this.setState({hashvalue:d});
+                            }
+                            else{
+                                this.setState({hashvalue:"Hasn't been Delivered"});
+                            }
+                        }} variant="outline-success">View Hash</Button>
+                       
                     </Col>
 
                 </Row>
+                <h3 className="mt-5">Transaction Hash</h3>
+                <p >{this.state.hashvalue}</p>
             </Col>
         </Row>
         </Container>

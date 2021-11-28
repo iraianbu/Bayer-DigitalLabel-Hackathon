@@ -37,8 +37,12 @@ app.get("/",async function(req,res){
         // Connect to the MongoDB cluster
         await client.connect();
         //await createListings(client,products);
-        const docs=await Find(client);
-        res.send(docs);
+        const cursor = await client.db("dn1").collection("Products").find();
+        const arr= await cursor.toArray();
+        const cursor2 = await client.db("dn1").collection("Orders").find();
+            const arr2= await cursor2.toArray();
+        var obj={"Products":arr,"Orders":arr2};
+        res.send(obj);
     
     
     } catch (e) {
@@ -156,6 +160,35 @@ app.post("/cart",async function(req,res){
     }
     
 });
+app.get("/completeorder",async function(req,res){
+    console.log("hi cart");
+    console.log(req.body);
+    const uri = "mongodb+srv://Suriyaa:mthaniga@cluster0.rsh4e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
+    const client = new MongoClient(uri);
+    try {
+        // Connect to the MongoDB cluster
+        await client.connect();
+        //await createListings(client,products);
+        // const docs=await createListings(client,req.body);
+        const cursor = await client.db("dn1").collection("Cartproducts").find();
+        const arr= await cursor.toArray();
+        console.log(arr);
+          console.log("hi");
+        await client.db("dn1").collection("Cartproducts").deleteMany({});
+        const result = await client.db("dn1").collection("Orders").insertMany(arr);
+        console.log(res);
+    
+    } catch (e) {
+        console.error(e);
+    } finally {
+        // Close the connection to the MongoDB cluster
+        await client.close();
+    
+    }
+    
+});
+
 app.get("/cartlength",async function(req,res){
     
   
@@ -168,6 +201,7 @@ app.get("/cartlength",async function(req,res){
        
         const cursor = await client.db("dn1").collection("Cartproducts").find().count();
         const cursor2 = await client.db("dn1").collection("Allproducts").find();
+        
         const arr= await cursor2.toArray();
       
      
@@ -259,8 +293,8 @@ app.post('/create-checkout-session', async (req, res) => {
         },
       ],
       mode: 'payment',
-      success_url: 'http://localhost:3000/Cart',
-      cancel_url: 'http://localhst:3000/Store',
+      success_url: 'http://localhost:3000/Success',
+      cancel_url: 'http://localhst:3000/Failure',
     });
   
     var obj={"url":session.url};

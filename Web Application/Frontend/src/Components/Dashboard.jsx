@@ -13,6 +13,7 @@ class Dashboard extends Component{
         super(props);
         this.state={
             products:[],
+            orders:[],
             b:0,
             selectedcategory:"Select Category",
             c:0,
@@ -141,7 +142,7 @@ class Dashboard extends Component{
                     
                 </Row>
 
-                {this.state.products.map((prod) => {
+                {this.state.orders.map((prod) => {
                     return(
                         <Row  className="tile"
                         style={{padding:"20px", backgroundColor:"#F4F4F4", borderRadius:"10px", marginBottom:"20px"}}>
@@ -294,7 +295,9 @@ class Dashboard extends Component{
         return res.json();
     }).then(async(res)=>{
        
-        await this.setState({products:res});
+        await this.setState({products:res["Products"]});
+        await this.setState({orders:res["Orders"]});
+        
         this.setState({spinnervisibility:0});
         
     })

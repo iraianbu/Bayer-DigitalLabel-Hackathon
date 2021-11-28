@@ -16,6 +16,7 @@ class QR extends Component {
   handleScan = data => {
     if (data) {
       this.setState({result: data })
+     
         var key={id:parseInt(this.state.result)};
         console.log(key);
         fetch('http://localhost:7000/products',{
@@ -28,6 +29,8 @@ class QR extends Component {
         if(res.ok)
         return res.json();
     }).then(async(res)=>{
+      var url="http://localhost:3000/Dashboard/"+parseInt(this.state.result);
+      window.location.href=url;
       var key={prod:res}
       fetch('http://localhost:7000/qr',{
         method: 'POST',
@@ -36,8 +39,7 @@ class QR extends Component {
         },
         body:JSON.stringify(key)
     })
-        // var url="http://localhost:3000/Dashboard/"+parseInt(this.state.result);
-        // window.location.href=url;
+        
     })
 
 

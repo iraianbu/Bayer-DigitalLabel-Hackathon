@@ -20,6 +20,8 @@ class Support extends Component{
     }
     renderdetails()
     {
+        const probId = Math.round(Math.random()*100000);
+
         if(Object.keys(this.state.orderChosen).length === 0)
         {
             return <div></div>
@@ -49,9 +51,15 @@ class Support extends Component{
                             />
                         
                     </Form.Group>
-                    <Button className="btn1" type="submit">
+                    <Button className="btn1"
+                        onClick={() => {
+                            document.querySelector("#probResponse").hidden = false;
+                        }}
+                    >
                         Submit
                     </Button>
+                    <h5 hidden id="probResponse" style={{marginTop:"40px", marginBottom:"100px", color:"green"}}> Request Submitted Sucessfully. Your Request is ID is: {probId} </h5>
+
                     </Container>
         
         );
@@ -64,7 +72,7 @@ class Support extends Component{
     
     }
     render(){
-
+        const reqId = Math.round(Math.random()*100000);
         return(
             <>
             <Container fluid
@@ -114,10 +122,11 @@ class Support extends Component{
 
                     </Row>
                     <Button className="btn2"
-                        style={{marginTop:"20px", marginBottom:"100px"}}
-                    onClick={() => {
-                        // upload file 
-                    }}>Upload</Button>
+                        style={{marginTop:"20px"}}
+                        onClick={() => {
+                            document.querySelector("#reqResponse").hidden = false;
+                        }}>Upload</Button>
+                    <h5 hidden id="reqResponse" style={{marginTop:"40px", marginBottom:"100px", color:"green"}}> Your request has been Submitted. Your Request is ID is: {reqId} </h5>
                     <Row> 
                         <Col md={9} style={{marginTop:"20px "}}> <h3> Frequently Asked Questions (FAQ) </h3> </Col> 
                     </Row>

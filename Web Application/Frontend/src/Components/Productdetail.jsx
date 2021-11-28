@@ -10,6 +10,13 @@ import ToggleButton from '@mui/material/ToggleButton';
 import { color } from "@mui/system";
 import { Tabs,Tab,TabPanel, TabList } from 'react-web-tabs';
 import 'react-web-tabs/dist/react-web-tabs.css';
+var finalreccomonadtion={
+    "45674": [ 45682, 45690 ] ,
+     "45682": [ 45674, 45690 ] ,
+    "45690": [ 45674, 45682 ] ,
+     "45674,45690": [ 45682 ] ,
+     "45682,45690": [ 45674 ] 
+};
 
 class Productdetail extends Component{
     constructor(state)
@@ -20,16 +27,19 @@ class Productdetail extends Component{
             prod:[],
             spinnerstatus:1,
             size:"small",
-            qty:0
+            qty:0,
+            recom:{},
+            recomstatus:0
 
         }
         this.addcomponent=this.addcomponent.bind(this);
+        this.addrecom=this.addrecom.bind(this);
 
     }
     componentDidMount()
     {
         const key={id:this.props.id}
-        console.log(key);
+        var w=this.props.id;
         fetch('http://localhost:7000/products',{
          method: 'POST',
          headers: {
@@ -42,9 +52,77 @@ class Productdetail extends Component{
      }).then(async(res)=>{
        
          await this.setState({prod:res});
+         if (w.toString() in finalreccomonadtion)
+         {
+             w=w.toString();
+             console.log(finalreccomonadtion[w][0]);
+             const key2={id:finalreccomonadtion[w][0]}
+             fetch('http://localhost:7000/products',{
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body:JSON.stringify(key2)
+            }).then((res)=>{
+                if(res.ok)
+                return res.json();
+            }).then((res)=>{
+                this.setState({recom:res});
+                this.setState({recomstatus:1});
+            })
+           
+         }
         await this.setState({spinnerstatus:0});
          
      })
+    }
+    addrecom()
+    {
+        if(this.state.recomstatus===0)
+        return<div></div>;
+        else{
+            return(
+                <Container>
+                <h2 style={{margin:"50px auto", fontWeight:"bolder"}}> Frequently Bought Together </h2>
+                <Row >
+                  
+                    <Col md={3} className="" style={{textAlign:"center"}}>
+                        <Card 
+                        style={{border:"none"}}
+                        >
+                            
+                            <Card.Img 
+                                style={{height:"150px", width:"150px", margin:"auto"}}
+                             src={this.state.prod.img_src} />
+                            <Card.Title><h5 style={{fontWeight:"bolder", marginTop:"30px"}}>{this.state.prod.name}</h5></Card.Title>
+                            <Card.Text style={{color:"green"}}>
+                            ₹ {this.state.prod.price}
+                            </Card.Text>
+                        </Card>
+                    </Col>
+                    <Col md={1} style={{textAlign:"center", marginTop:"110px"}}>
+                        <span><i class="fas fa-plus fa-2x"></i></span>
+                        
+                    </Col>
+                    <Col md={3} className="" style={{textAlign:"center"}}>
+                        <Card 
+                        style={{border:"none"}}
+                        >
+                            
+                            <Card.Img 
+                                style={{height:"150px", width:"150px", margin:"auto"}}
+                             src={this.state.recom.img_src} />
+                            <Card.Title><h5 style={{fontWeight:"bolder", marginTop:"30px"}}>{this.state.recom.name}</h5></Card.Title>
+                            <Card.Text style={{color:"green"}}>
+                            ₹ {this.state.recom.price}
+                            </Card.Text>
+                        </Card>
+                    </Col>
+                  
+                </Row>
+                </Container>
+            );
+        }
     }
     addcomponent()
     {
@@ -91,7 +169,7 @@ class Productdetail extends Component{
                                 </Nav>
                              </Col>
                             <Col md={4}>
-                            <QuantityPicker onChange={async(value)=>await this.setState({qty:value})} max={10} min={0} style={{height:"100px"}}/>
+                            <QuantityPicker onChange={async(value)=>await this.setState({qty:value})}  max={10} min={1} style={{height:"100px"}}/>
                             </Col> 
                             <Col md={4}>
                             <ToggleButtonGroup
@@ -167,43 +245,7 @@ class Productdetail extends Component{
                 </Row>
             </Container>
            <Container fluid style={{width:"80%", marginTop:"50px"}}>
-           <h2 style={{margin:"50px auto", fontWeight:"bolder"}}> Frequently Bought Together </h2>
-            <Row >
-              
-                <Col md={3} className="" style={{textAlign:"center"}}>
-                    <Card 
-                    style={{border:"none"}}
-                    >
-                        
-                        <Card.Img 
-                            style={{height:"150px", width:"150px", margin:"auto"}}
-                         src={this.state.prod.img_src} />
-                        <Card.Title><h5 style={{fontWeight:"bolder", marginTop:"30px"}}>{this.state.prod.name}</h5></Card.Title>
-                        <Card.Text style={{color:"green"}}>
-                        ₹ {this.state.prod.price}
-                        </Card.Text>
-                    </Card>
-                </Col>
-                <Col md={1} style={{textAlign:"center", marginTop:"110px"}}>
-                    <span><i class="fas fa-plus fa-2x"></i></span>
-                    
-                </Col>
-                <Col md={3} className="" style={{textAlign:"center"}}>
-                    <Card 
-                    style={{border:"none"}}
-                    >
-                        
-                        <Card.Img 
-                            style={{height:"150px", width:"150px", margin:"auto"}}
-                         src={this.state.prod.img_src} />
-                        <Card.Title><h5 style={{fontWeight:"bolder", marginTop:"30px"}}>{this.state.prod.name}</h5></Card.Title>
-                        <Card.Text style={{color:"green"}}>
-                        ₹ {this.state.prod.price}
-                        </Card.Text>
-                    </Card>
-                </Col>
-              
-            </Row>
+         {this.addrecom()}
                <h2 style={{marginTop:"30px", fontWeight:"bolder"}}> More Info </h2>
             <Tabs defaultTab="vertical-tab-one" style={{marginBottom:"50px"}}>
                 <TabList >
