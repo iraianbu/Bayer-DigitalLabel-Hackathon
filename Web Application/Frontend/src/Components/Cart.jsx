@@ -134,7 +134,7 @@ class Cart extends Component{
                                 </tr>
                                 <tr>
                                     <th colSpan="2"> Discount applied for 10% </th>
-                                    <th style={{color:"red"}}> -{this.gettotal()*0.1} </th>
+                                    <th style={{color:"red"}}> {Math.floor(this.gettotal()*0.1)} </th>
                                 </tr>
                                 <tr>
                                     <th colSpan="2"> Total </th>
