@@ -94,7 +94,7 @@ For running hyperledger fabric:
 - Once downloaded, go into the fabric samples folder, and then asset transfer basic, and then replace chaincode-javascript folder with the one from the above shared repository.
 - Now follow the steps given at the repository and execute the commands to interact with the deployed chaincode. 
 
-For running the deep learning demo:
+For running the deep learning demo: 
 - Download the ipynb file from the repository
 - Run it through Google Colab and attatch the files specified in the Readme file.
 - Once done, execute the cells in sequence to use the trained model to make predictions.
