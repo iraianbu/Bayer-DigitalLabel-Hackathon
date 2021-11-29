@@ -28,6 +28,7 @@ Our application's key features include the following:
 Each part of the application has been explained detailed in the PowerPoint presentation and the demo video.
 
 ## Product Screenshots
+## Web App
 ### Dashboard Page
 ![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Dashboard.png)
 ![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Your_products.png)
@@ -36,11 +37,24 @@ Each part of the application has been explained detailed in the PowerPoint prese
 ### Store Page
 ![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Store.png)
 ![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Productdetail.png)
-![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Frequent.png)
-![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Frequent.png)
-![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Frequent.png)
-![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Frequent.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Cart.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Digital%20Payment.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Success%20page.png)
 
+### Authenticity Page
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Authenticity%20with%20qr%20scanning'.jfif)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Authenticity.jfif)
+
+### Support Page
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Support.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/Smart%20scan%20with%20FAQ's.png)
+
+## Blockchain Demo Screenshots
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/docker%201.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/hyperledger%20explorer.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/fabric%20terminal.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/docker.png)
+![Dashboard-1](https://github.com/suriyaa333/Bayer-Digital-Label-Hackathon/blob/master/Bayer-Screenshots/block%20hash.png)
 
 ## Instructions on running
 
