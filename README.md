@@ -4,7 +4,8 @@
 This project involves the implementation of a one-stop solution for all of the farmer's needs. Some of the major problems addressed include the creation of a unique digital identity, enabling a dynamic label that can be used to view detailed information about the product, supply chain visibility, product authenticity, customer support, ease of shopping experience.
 
 ## Demo Video
-The entire demo consisting of the entire web application demo followed by the blockchain hyperledger fabric demo, and then the deep learning model to predict the plant disease from the image is present at https://www.youtube.com/watch?v=zjjBaXwKuS0
+- The entire demo consisting of the entire web application demo followed by the blockchain hyperledger fabric demo, and then the deep learning model to predict the plant disease from the image is present at https://www.youtube.com/watch?v=zjjBaXwKuS0
+- For sample demo, while scanning the QR code in the demo website use any QR code in the QR code folder. These QR codes carry the unique ID of the product. 
 
 
 ## Our Solution and Key Features
