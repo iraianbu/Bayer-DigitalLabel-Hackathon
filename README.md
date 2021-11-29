@@ -27,6 +27,31 @@ Our application's key features include the following:
 
 Each part of the application has been explained detailed in the PowerPoint presentation and the demo video.
 
+## Tech Stack
+### Web App
+#### Frontend
+- HTML
+- CSS
+- Javascript 
+- ReactJS
+#### Backend
+- Node JS
+- Express
+- MongoDB
+- Stripe API
+### Blockchain Backend
+- Hyperledger Fabric V2.1
+- Hyperledger Explorer
+- Docker 
+- Node SDK for chaincode
+### Deep Learning - Plant Disease Prediction
+- Python
+- Numpy 
+- Keras
+- Tensorflo 
+- Matplotlib
+
+
 ## Product Screenshots
 ## Web App
 ### Dashboard Page
