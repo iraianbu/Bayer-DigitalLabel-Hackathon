@@ -1,5 +1,5 @@
 # Blockchain Backend
-## Base-62 Counter Mechanism to Generate a Unique 7 digit Code
+## Base-62 Counter Mechanism to Generate a Unique digital ID
 - This generated code is used to represent the unique digital ID of each product, this ID is made into a QR code, which is present in the packaging of every Bayer product. 
 - The character set for this algorithm is [A-Z], [a-z], and [0-9].
 - Assuming the maximum size of the each product's unique ID to be at most 7 digits, we can have upto 3.5 trillion unique digital IDs which can still be increased in the future if required. 
