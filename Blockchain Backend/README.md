@@ -1,4 +1,10 @@
 # Blockchain Backend
+## Base-62 Counter Mechanism to Generate a Unique 7 digit Code
+- This generated code is used to represent the unique digital ID of each product, this ID is made into a QR code, which is present in the packaging of every Bayer product. 
+- The character set for this algorithm is [A-Z], [a-z], and [0-9].
+- Assuming the maximum size of the each product's unique ID to be at most 7 digits, we can have upto 3.5 trillion unique digital IDs which can still be increased in the future if required. 
+- For scalability purposes, we are using a counetr approach, where we have considered 2 counters counting within a range. At runtime, a counter is chosen randomly, and its value is hashed using the algorithm and incremented to ensure that a unique ID is generated each time. 
+- The code for the algorithm can be found in the base62.js file
 
 ## Commands to be executed in the Fabric CLI
 #### Start Network
